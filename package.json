@@ -1,0 +1,27 @@
+{
+  "name"         : "mfw",
+  "version"      : "0.0.1",
+  "description"  : "",
+  "author"       : "Mattias Runge <mattias@runge.se>",
+  "repository"   : { 
+    "type" : "git",
+    "url"  : "git://github.com/mattiasrunge/mfw.git"
+  },
+  "engines"      : { 
+    "node": ">= 0.8.0"
+  },
+  "license"      : "GPLv2",
+  "dependencies" : {
+    "knockout"      : ">= 3.1.0",
+    "requirejs"     : ">= 2.1.11",
+    "jquery"        : ">= 2.1.0",
+    "text"          : "git://github.com/requirejs/text.git",
+    "requirejs-tpl" : ">= 0.2.0",
+    "tiny-emitter"  : ">= 0.1.12"
+  },
+  "devDependencies" : {
+    "jshint"     : "~1.1.0",
+    "proxyquire" : ">= 0.5.1",
+    "assert"     : ">= 0.4.9"
+  }
+}
