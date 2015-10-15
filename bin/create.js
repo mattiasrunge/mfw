@@ -2,18 +2,16 @@
 
 const fs = require("fs-extra-promise");
 
-if (process.argv.length < 3) {
-    console.error("Missing target folder name (ex. client)");
-    process.exit(255);
-}
+console.log("Initializing MFW project, this will overwrite files in this directory!");
 
-console.log("Copying MFW client template to " + process.argv[2]);
-
-fs.copyAsync(__dirname + "/../template", process.argv[2])
+fs.copyAsync(__dirname + "/../template_client", "client")
+.then(function() {
+    return fs.copyAsync(__dirname + "/../template_server", ".");
+})
 .then(function() {
     console.log("Copying complete!");
     console.log("You should add this to your package.json:");
     console.log("  \"scripts\": {");
-    console.log("    \"install\": \"cd " + process.argv[2] + " && npm install\"");
+    console.log("    \"install\": \"cd client && npm install\"");
     console.log("  }");
 });
