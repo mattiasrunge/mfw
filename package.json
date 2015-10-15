@@ -1,6 +1,6 @@
 {
   "name": "mfw",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A very simple web framework setting up a http server and socket io, script to generate a boilerplate client",
   "main": "index.js",
   "keywords": [
@@ -19,6 +19,7 @@
   "dependencies": {
     "bluebird": "^2.10.1",
     "clean-css": "^3.4.5",
+    "fs-extra-promise": "^0.3.0",
     "fs-promise": "^0.3.1",
     "koa": "^1.0.0",
     "koa-bodyparser": "^2.0.1",
