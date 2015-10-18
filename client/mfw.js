@@ -11,20 +11,21 @@ require.config({
         material: "node_modules/bootstrap-material-design/dist/js/material.min",
         mprogress: "node_modules/mprogress/build/js/mprogress.min",
         moment: "node_modules/moment/min/moment.min",
+        snackbar: "node_modules/snackbarjs/dist/snackbar.min",
         /** PATHS **/
     },
     shim: {
         bootstrap: {
-            deps: ["jquery"],
-            exports: "jQuery"
+            deps: ["jquery"]
         },
         ripples: {
-            deps: ["jquery"],
-            exports: "jQuery"
+            deps: ["jquery"]
         },
         material: {
-            deps: ["jquery"],
-            exports: "jQuery"
+            deps: ["jquery"]
+        },
+        snackbar: {
+            deps: ["jquery"]
         },
         /** SHIM **/
     }
