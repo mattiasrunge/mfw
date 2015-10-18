@@ -10,6 +10,7 @@ require.config({
         ripples: "node_modules/bootstrap-material-design/dist/js/ripples.min",
         material: "node_modules/bootstrap-material-design/dist/js/material.min",
         mprogress: "node_modules/mprogress/build/js/mprogress.min",
+        moment: "node_modules/moment/min/moment.min"
         /** PATHS **/
     },
     shim: {

@@ -1,6 +1,6 @@
 {
   "name": "mfw",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A very simple web framework setting up a http server and socket io, script to generate a boilerplate client",
   "main": "index.js",
   "keywords": [
