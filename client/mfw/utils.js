@@ -3,6 +3,16 @@
 define([
     "knockout"
 ], function(ko) {
+
+    var clipBoardContent = false;
+    document.addEventListener("copy", function(e) {
+        if (clipBoardContent) {
+            e.clipboardData.setData("text/plain", clipBoardContent);
+            e.preventDefault();
+            clipBoardContent = false;
+        }
+    });
+
     var Me = function() {
         this.registerComponents = function(list) {
             list.forEach(function(name) {
@@ -11,6 +21,11 @@ define([
                     template: { require: "text!components/" + name + "/template.html" }
                 });
             });
+        };
+
+        this.copyToClipboard = function(content) {
+            clipBoardContent = content;
+            document.execCommand("copy");
         };
     };
 

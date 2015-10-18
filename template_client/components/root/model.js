@@ -2,7 +2,8 @@
 
 define([
     "knockout",
-    "mfw/socket"
+    "mfw/socket",
+    "lib/bindings"
 ], function(ko, socket) {
     return function() {
         this.response = ko.observable(false);

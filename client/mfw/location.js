@@ -104,6 +104,8 @@ define([
                 });
             }
         }
+
+        // TODO: Remove event handles on dispose
     };
 
     return me;
