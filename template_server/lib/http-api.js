@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-    "echo": function*(data) {
+    "echo": function*(session, data) {
         return data;
     }
 };
