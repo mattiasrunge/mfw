@@ -5,10 +5,10 @@ const fs = require("fs-extra-promise");
 console.log("Initializing MFW project, this will overwrite files in this directory!");
 
 fs.copyAsync(__dirname + "/../template_client", "client")
-.then(function() {
+.then(() => {
     return fs.copyAsync(__dirname + "/../template_server", ".");
 })
-.then(function() {
+.then(() => {
     console.log("Copying complete!");
     console.log("You should add this to your package.json:");
     console.log("  \"scripts\": {");

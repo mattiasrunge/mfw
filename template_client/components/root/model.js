@@ -1,15 +1,13 @@
 "use strict";
 
-define([
-    "knockout",
-    "mfw/socket",
-    "lib/bindings"
-], function(ko, socket) {
-    return function() {
+const ko = require("knockout");
+const socket = require("mfw/socket");
+
+module.exports = () => {
         this.response = ko.observable(false);
 
         console.log("Sending Ping");
-        socket.emit("echo", "pong", function(error, data) {
+        socket.emit("echo", "pong", (error, data) => {
             if (error) {
                 console.error(error);
                 this.response(error);
@@ -18,6 +16,6 @@ define([
 
             console.log("Received " + data);
             this.response(data);
-        }.bind(this));
+        });
     };
-});
+};

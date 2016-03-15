@@ -1,60 +1,60 @@
 "use strict";
 
-define([
-    "/socket.io/socket.io.js"
-], function(socket) {
-    var Me = function() {
+const socket = require("/socket.io/socket.io.js");
+
+let connection = null;
+let connected = false;
+
+module.exports = {
+    connect: () => {
         console.log("Connecting to backend...");
 
-        var connected = false;
-        var connection = socket.connect();
+        connected = false;
+        connection = socket.connect();
 
-        connection.on("connect", function() {
+        connection.on("connect", () => {
             console.log("Connected to backend!");
             connected = true;
         });
 
-        connection.on("reconnect", function() {
+        connection.on("reconnect", () => {
             console.log("Reconnected to backend!");
             connected = true;
         });
 
-        connection.on("connect_error", function(error) {
+        connection.on("connect_error", (error) => {
             console.error("Error when connecting to backend, ", error);
             connected = false;
         });
 
-        connection.on("reconnect_error", function(error) {
+        connection.on("reconnect_error", (error) => {
             console.error("Error when reconnecting to backend, ", error);
             connected = false;
         });
 
-        connection.on("reconnect_failed", function(error) {
+        connection.on("reconnect_failed", (error) => {
             console.error("Failed to reconnect to backend, ", error);
             connected = false;
         });
 
-        connection.on("connect_timeout", function(error) {
+        connection.on("connect_timeout", (error) => {
             console.error("Connection to backend timed out, ", error);
             connected = false;
         });
+    },
+    on: (name, callback) => {
+        connection.on(name, callback);
 
-        this.on = function(name, callback) {
-            connection.on(name, callback);
+        if (name === "connect" && connected) {
+            callback();
+        }
+    },
+    off: (name, callback) => {
+        connection.removeListener(name, callback);
+    },
+    emit: (name, data, callback) => {
+        connection.emit(name, data, callback);
+    }
+};
 
-            if (name === "connect" && connected) {
-                callback();
-            }
-        };
-
-        this.off = function(name, callback) {
-            connection.removeListener(name, callback);
-        };
-
-        this.emit = function(name, data, callback) {
-            connection.emit(name, data, callback);
-        };
-    };
-
-    return new Me();
-});
+module.exports.connect();

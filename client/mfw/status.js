@@ -1,89 +1,78 @@
 "use strict";
 
-define([
-    "knockout",
-    "mprogress",
-    "jquery",
-    "snackbar"
-], function(ko, Mprogress, $) {
-    var Me = function() {
-        var mprogress = new Mprogress({ template: 4 });
-        var list = ko.observableArray();
+const ko = require("knockout");
+const Mprogress = require("mprogress");
+const $ = require("jquery");
+require("snackbar");
 
-        this.printError = function(text) {
-            console.error(text);
+let mprogress = new Mprogress({ template: 4 });
+let list = ko.observableArray();
 
-            var options =  {
-                content: "<strong>Error:</strong> " + text,
-                style: "alert-danger",
-                timeout: 10000,
-                htmlAllowed: true
-            }
+module.exports = {
+    printError: (text) => {
+        console.error(text);
 
-            $.snackbar(options).snackbar("show");
-        };
+        let options = {
+            content: "<strong>Error:</strong> " + text,
+            style: "alert-danger",
+            timeout: 10000,
+            htmlAllowed: true
+        }
 
-        this.printSuccess = function(text) {
-            console.log(text);
+        $.snackbar(options).snackbar("show");
+    },
+    printSuccess: (text) => {
+        console.log(text);
 
-            var options =  {
-                content: "<strong>Success:<//strong> " + text,
-                style: "alert-success",
-                timeout: 5000,
-                htmlAllowed: true
-            }
+        let options = {
+            content: "<strong>Success:<//strong> " + text,
+            style: "alert-success",
+            timeout: 5000,
+            htmlAllowed: true
+        }
 
-            $.snackbar(options).snackbar("show");
-        };
+        $.snackbar(options).snackbar("show");
+    },
+    printWarning: (text) => {
+        console.log(text);
 
-        this.printWarning = function(text) {
-            console.log(text);
+        let options = {
+            content: "<strong>Warning:<//strong> " + text,
+            style: "alert-warning",
+            timeout: 5000,
+            htmlAllowed: true
+        }
 
-            var options =  {
-                content: "<strong>Warning:<//strong> " + text,
-                style: "alert-warning",
-                timeout: 5000,
-                htmlAllowed: true
-            }
+        $.snackbar(options).snackbar("show");
+    },
+    printInfo: (text) => {
+        console.log(text);
 
-            $.snackbar(options).snackbar("show");
-        };
+        let options = {
+            content: "<strong>Information:<//strong> " + text,
+            style: "alert-info",
+            timeout: 5000,
+            htmlAllowed: true
+        }
 
-        this.printInfo = function(text) {
-            console.log(text);
+        $.snackbar(options).snackbar("show");
+    },
+    create: () => {
+        let status = ko.observable(false);
+        list.push(status);
+        return status;
+    },
+    destroy: (status) => {
+        list.remove(status);
+    }
+};
 
-            var options =  {
-                content: "<strong>Information:<//strong> " + text,
-                style: "alert-info",
-                timeout: 5000,
-                htmlAllowed: true
-            }
+ko.computed(() => {
+    let loading = list().filter((status) => status()).length > 0;
 
-            $.snackbar(options).snackbar("show");
-        };
-
-        this.create = function() {
-            var status = ko.observable(false);
-            list.push(status);
-            return status;
-        };
-
-        this.destroy = function(status) {
-            list.remove(status);
-        };
-
-        ko.computed(function() {
-            var loading = list().filter(function(status) {
-                return status();
-            }).length > 0;
-
-            if (loading) {
-                mprogress.start();
-            } else {
-                mprogress.end();
-            }
-        });
-    };
-
-    return new Me();
+    if (loading) {
+        mprogress.start();
+    } else {
+        mprogress.end();
+    }
 });
